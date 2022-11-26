@@ -6,6 +6,12 @@ export const ping: Command = {
         .setName("ping")
         .setDescription("pong"),
     run: async function (interaction: CommandInteraction<CacheType>): Promise<void> {
-        interaction.reply("Pong");
-    }
+        interaction.channel?.send("Pong").then (async(msg)=>{
+
+            interaction.reply(`${msg.createdTimestamp - interaction.createdTimestamp}ms` )
+            msg.delete();
+        })
+
+    },
+    help: "Bot Latency Test"
 }
